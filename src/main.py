@@ -15,7 +15,7 @@ from pymongo import MongoClient
 #     count += 1
 #     print("Line{}: {}".format(count, line.strip()))
 
-tickers_list = ['PETR4', 'GGPS3']
+tickers_list = ['FRAS3', 'GGPS3']
 
 run_daily(tickers_list)
 run_hourly(tickers_list)

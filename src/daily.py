@@ -22,8 +22,8 @@ def run_daily(tickers: list):
         data = mt5.copy_rates_range(
             ticker,
             mt5.TIMEFRAME_D1,
-            datetime(2023, 12, 1),
-            datetime(2023, 12, 19),
+            datetime(2021, 12, 1),
+            datetime(2023, 12, 31),
         )
 
         data = pd.DataFrame(data)
@@ -41,8 +41,12 @@ def run_daily(tickers: list):
                 'date': ticker_history['time'],
                 'open': ticker_history['open'],
                 'close': ticker_history['close'],
-                'dateStr': date_str
-                # 'createdAt': datetime.now
+                'high': ticker_history['high'],
+                'low': ticker_history['low'],
+                'volume': ticker_history['real_volume'],
+                'dateStr': date_str,
+                'previousClose': previous_close,
+                'previousCloseDate': previous_date
             }
 
             print(document)
