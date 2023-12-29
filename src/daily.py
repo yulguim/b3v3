@@ -28,9 +28,11 @@ def run_daily(tickers: list):
 
         data = pd.DataFrame(data)
 
-        print(data)
-
+        # Converter data
         data['time'] = pd.to_datetime(data['time'], unit='s')
+
+        previous_close = None
+        previous_date = None
 
         for index, ticker_history in data.iterrows():
             date_str = ticker_history['time'].strftime('%d-%m-%Y')
@@ -49,7 +51,14 @@ def run_daily(tickers: list):
                 'previousCloseDate': previous_date
             }
 
-            print(document)
+            if previous_close is not None:
+                top = ticker_history['open'] - previous_close
+                bottom = abs(previous_close)
+                percentage_change_from_previous_close_and_open = round((top / bottom) * 100, 4)
+                document['percentageChangeFromPreviousCloseAndOpen'] = percentage_change_from_previous_close_and_open
+
+            previous_close = ticker_history['close']
+            previous_date = ticker_history['time']
 
             collection.insert_one(document)
 
