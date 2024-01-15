@@ -5,7 +5,7 @@ import MetaTrader5 as mt5
 import pandas as pd
 
 
-def run_daily(tickers: list):
+def run_daily(tickers: list, start: datetime, end: datetime):
     print(tickers)
 
     client = MongoClient("mongodb://192.168.31.188:27017/")
@@ -17,16 +17,23 @@ def run_daily(tickers: list):
     mt5.initialize()
 
     for ticker in tickers:
+        if collection.count_documents({'ticker': ticker}) > 0:
+            continue
+
         print(ticker)
 
         data = mt5.copy_rates_range(
             ticker,
             mt5.TIMEFRAME_D1,
-            datetime(2021, 12, 1),
-            datetime(2023, 12, 31),
+            start,
+            end,
         )
 
         data = pd.DataFrame(data)
+
+        if 'time' not in data.columns:
+            print('{} no time', ticker)
+            continue
 
         # Converter data
         data['time'] = pd.to_datetime(data['time'], unit='s')

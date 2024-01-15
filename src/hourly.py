@@ -19,10 +19,14 @@ def run_hourly(tickers: list):
             ticker,
             mt5.TIMEFRAME_H1,
             datetime(2023, 12, 1),
-            datetime(2023, 12, 19),
+            datetime.now(),
         )
 
         data = pd.DataFrame(data)
+
+        if 'time' not in data.columns:
+            print('{} no time', ticker)
+            continue
 
         print(data)
 
