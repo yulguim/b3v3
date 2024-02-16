@@ -18,10 +18,10 @@ start = datetime(2022, 1, 1)
 end = datetime.now()
 
 run_daily(tickers_list, start, end)
-run_hourly(tickers_list)
+run_hourly(tickers_list, start, end)
 
 tickers_list = open('resources/win.txt', 'r')
 tickers_list = list(map(lambda x: x.strip(), tickers_list.readlines()))
 
 run_daily(tickers_list, start, end)
-run_hourly(tickers_list)
+run_hourly(tickers_list, start, end)

@@ -5,7 +5,7 @@ import MetaTrader5 as mt5
 import pandas as pd
 
 
-def run_hourly(tickers: list):
+def run_hourly(tickers: list, start: datetime, end: datetime):
     client = MongoClient("mongodb://192.168.31.188:27017/")
 
     db = client.get_database('b3')
@@ -18,8 +18,8 @@ def run_hourly(tickers: list):
         data = mt5.copy_rates_range(
             ticker,
             mt5.TIMEFRAME_H1,
-            datetime(2023, 12, 1),
-            datetime.now(),
+            start,
+            end,
         )
 
         data = pd.DataFrame(data)
