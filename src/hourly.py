@@ -28,7 +28,7 @@ def run_hourly(tickers: list, start: datetime, end: datetime):
             print('{} no time', ticker)
             continue
 
-        print(data)
+        print('{} time', ticker)
 
         data['time'] = pd.to_datetime(data['time'], unit='s')
 
