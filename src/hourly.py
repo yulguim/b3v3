@@ -50,7 +50,7 @@ def run_hourly(tickers: list, start: datetime, end: datetime):
 
         for key, value in list.items():
             result = collection.update_one({'key': key}, {'$set': {'hourly': value}})
-            print("match:{}, modified:{}".format(result.matched_count, result.modified_count))
+            print("ticker:{}, match:{}, modified:{}".format(ticker, result.matched_count, result.modified_count))
 
     mt5.shutdown()
 
