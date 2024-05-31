@@ -43,7 +43,10 @@ def run_hourly(tickers: list, start: datetime, end: datetime):
             document = {
                 'date': ticker_history['time'],
                 'open': ticker_history['open'],
-                'close': ticker_history['close']
+                'close': ticker_history['close'],
+                'high': ticker_history['high'],
+                'low': ticker_history['low'],
+                'volume': ticker_history['real_volume'],
             }
 
             list[key].append(document)
