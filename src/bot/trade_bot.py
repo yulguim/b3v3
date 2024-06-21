@@ -7,6 +7,10 @@ strategy_list = list(map(lambda x: x.strip(), strategy_list.readlines()))
 mt5.initialize()
 
 for line in strategy_list:
+    if line.startswith("#"):
+        print("Skipping line: {}".format(line))
+        continue
+
     line = line.split(";")
     info = StrategyDetails(line[0], float(line[1]), int(line[2]))
 
