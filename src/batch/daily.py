@@ -1,16 +1,12 @@
 from datetime import datetime
 
-from pymongo import MongoClient
 import MetaTrader5 as mt5
 import pandas as pd
+from pymongo.database import Database
 
 
-def run_daily(tickers: list, start: datetime, end: datetime):
+def run_daily(tickers: list, start: datetime, end: datetime, db: Database):
     print(tickers)
-
-    client = MongoClient("mongodb://192.168.31.188:27017/")
-
-    db = client.get_database('b3')
 
     collection = db.get_collection('stockHistory')
 

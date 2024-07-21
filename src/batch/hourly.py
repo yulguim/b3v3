@@ -1,15 +1,11 @@
 from datetime import datetime
 
-from pymongo import MongoClient
 import MetaTrader5 as mt5
 import pandas as pd
+from pymongo.database import Database
 
 
-def run_hourly(tickers: list, start: datetime, end: datetime):
-    client = MongoClient("mongodb://192.168.31.188:27017/")
-
-    db = client.get_database('b3')
-
+def run_hourly(tickers: list, start: datetime, end: datetime, db: Database):
     collection = db.get_collection('stockHistory')
 
     mt5.initialize()

@@ -1,7 +1,13 @@
-import MetaTrader5 as mt5
-from src.models.strategy_details import StrategyDetails
+import os
 
-strategy_list = open("../resources/strategies.txt", "r")
+import MetaTrader5 as mt5
+
+from strategy_details import StrategyDetails
+
+strategy_path = '../resources/strategies.txt'
+strategy_path = os.path.join(os.path.dirname(__file__), strategy_path)
+
+strategy_list = open(strategy_path, "r")
 strategy_list = list(map(lambda x: x.strip(), strategy_list.readlines()))
 
 mt5.initialize()
