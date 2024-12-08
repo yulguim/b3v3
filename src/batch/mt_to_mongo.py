@@ -1,4 +1,5 @@
 from pathlib import Path
+from time import sleep
 
 from pymongo import MongoClient
 
@@ -7,6 +8,10 @@ from daily import *
 from hourly import *
 
 client = MongoClient(config.MONGODB_URL)
+
+client.drop_database(config.MONGODB_DATABASE)
+
+sleep(10)
 
 db = client.get_database(config.MONGODB_DATABASE)
 
